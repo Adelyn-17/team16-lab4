@@ -1,28 +1,21 @@
 `timescale 1ns / 1ns
 module vga_colorbar(
-input wire sys_clk , //System Clock, 50MHz
-input wire sys_rst_n , //Reset signal. Low level is effective
+input wire sys_clk , 
+input wire sys_rst_n , 
 
-output wire hsync , //Line sync signal
-output wire vsync , //Field sync signal
-output wire [15:0] rgb //RGB565 color data
-
+output wire hsync , 
+output wire vsync , 
+output wire [15:0] rgb 
 );
 
- ////
- //\* Parameter and Internal Signal \//
- ////
-
- //wire define
- wire vga_clk ; //VGA working clock, 25MHz
- wire [9:0] pix_x ; //x coordinate of current pixel
- wire [9:0] pix_y ; //y coordinate of current pixel
- wire [15:0] pix_data; //color information
+ 
+ wire vga_clk ; 
+ wire [9:0] pix_x ; 
+ wire [9:0] pix_y ; 
+ wire [15:0] pix_data;
 
 
- ////
- //\* Instantiation \//
- ////
+ 
 
  //------------- clk_gen_inst -------------
  pll pll_inst
@@ -33,29 +26,30 @@ output wire [15:0] rgb //RGB565 color data
  .vga_clk(vga_clk)
  );
 
- //------------- vga_pic_inst -------------
+
  vga_pic vga_pic_inst
  (
- .vga_clk (vga_clk ), //VGA working clock, 25MHz
- .sys_rst_n (sys_rst_n ), //Reset signal. Low level is effective
- .pix_x (pix_x ), //x coordinate of current pixel
- .pix_y (pix_y ), //y coordinate of current pixel
+ .vga_clk (vga_clk ), 
+ .sys_rst_n (sys_rst_n ), 
+ .pix_x (pix_x ), 
+ .pix_y (pix_y ), 
 
- .pix_data (pix_data ) //color information
+ .pix_data (pix_data ) 
  );
 
- //------------- vga_ctrl_inst -------------
+ 
  vga_ctrl vga_ctrl_inst
  (
- .vga_clk (vga_clk ), //VGA working clock, 25MHz
- .sys_rst_n (sys_rst_n ), //Reset signal. Low level is effective
- .pix_data (pix_data ), //color information
+ .vga_clk (vga_clk ), 
+ .sys_rst_n (sys_rst_n ), 
+ .pix_data (pix_data ), 
 
- .pix_x (pix_x ), //x coordinate of current pixel
- .pix_y (pix_y ), //y coordinate of current pixel
- .hsync (hsync ), //Line sync signal
- .vsync (vsync ), //Field sync signal
- .rgb (rgb ) //RGB565 color data
+ .pix_x (pix_x ), 
+ .pix_y (pix_y ), 
+ .hsync (hsync ), 
+ .vsync (vsync ), 
+ .rgb (rgb ) 
  );
+
 
  endmodule
