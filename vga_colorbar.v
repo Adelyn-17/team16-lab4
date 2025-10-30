@@ -17,7 +17,7 @@ output wire [15:0] rgb
 
  
 
- //------------- clk_gen_inst -------------
+
  pll pll_inst
  (
  .sys_clk(sys_clk),
@@ -53,3 +53,4 @@ output wire [15:0] rgb
 
 
  endmodule
+
